@@ -2,75 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>For Maya 💖</title>
   <style>
-    /* Fixed scroll issue by ensuring body doesn't scroll and app handles overflow better */
     * { box-sizing:border-box; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; margin:0; padding:0;}
-    body { height:100vh; background:#0f0f14; color:#fff; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;}
+    body { height:100vh; background:#0f0f14; color:#fff; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; touch-action: manipulation; }
     
-    .top-notice {
-      position: absolute;
-      top: 15px;
-      width: 90%;
-      text-align: center;
-      font-size: 1rem;
-      font-weight: 800;
-      color: #ff6b9c;
-      z-index: 100;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      animation: noticePulse 2s infinite;
-    }
-
-    @keyframes noticePulse {
-      0% { opacity: 0.6; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.02); }
-      100% { opacity: 0.6; transform: scale(1); }
-    }
-
+    .top-notice { position: absolute; top: 15px; width: 90%; text-align: center; font-size: 0.8rem; font-weight: 800; color: #ff6b9c; z-index: 100; letter-spacing: 0.5px; text-transform: uppercase; animation: noticePulse 2s infinite; }
+    @keyframes noticePulse { 0% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.02); } 100% { opacity: 0.6; transform: scale(1); } }
     .bg-heart { position: absolute; color: #ff6b9c; opacity: 0.7; pointer-events: none; z-index: 1; animation: floatUp linear forwards; }
     .music-container { position: fixed; top: 35px; right: 20px; z-index: 110; display: flex; align-items: center; gap: 10px; }
     .music-prompt { background: #ff6b9c; color: #000; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; animation: bounce 2s infinite; }
-    .music-player { background: rgba(255, 107, 156, 0.4); padding: 10px; border-radius: 50%; cursor: pointer; border: 2px solid #ff6b9c; display: flex; align-items: center; justify-content: center; }
-
+    .music-player { background: rgba(255, 107, 156, 0.4); padding: 10px; border-radius: 50%; cursor: pointer; border: 2px solid #ff6b9c; display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; }
     #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); display: none; align-items: center; justify-content: center; z-index: 200; flex-direction: column; text-align: center; }
-    #overlay h1 { font-size: 3rem; color: #ff6b9c; padding: 20px; animation: popIn 0.6s ease; text-shadow: 0 0 15px rgba(255,107,156,0.6); }
+    #overlay h1 { font-size: 2.5rem; color: #ff6b9c; padding: 20px; animation: popIn 0.6s ease; text-shadow: 0 0 15px rgba(255,107,156,0.6); }
 
     @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); opacity: 0.8; } to { transform: translateY(-20vh) rotate(360deg); opacity: 0; } }
     @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
     @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateX(0);} 40% {transform: translateX(-5px);} }
 
-    /* Changed overflow to visible so the giant button doesn't cause scrollbars */
-    .screen { text-align:center; width:90%; max-width:500px; z-index:10; position:relative; margin-top: 40px; overflow: visible; padding: 20px 0; }
-    
-    /* Content wrapper for sections that actually NEED scrolling (like Reasons) */
-    .scrollable-content { max-height: 80vh; overflow-y: auto; padding-right: 5px; }
-    
+    .screen { text-align:center; width:95%; max-width:500px; z-index:10; position:relative; margin-top: 40px; overflow: visible; padding: 10px 0; }
+    .scrollable-content { max-height: 80vh; overflow-y: auto; padding-right: 5px; -webkit-overflow-scrolling: touch; padding-bottom: 40px; }
+    .scrollable-content::-webkit-scrollbar { width: 0px; background: transparent; }
+
     img, video { width:240px; border-radius:16px; margin-bottom: 1.5rem; border: 3px solid #ff6b9c; box-shadow: 0 0 20px rgba(255,107,156,0.3); }
     h1 { font-size: 1.8rem; line-height: 1.4; margin-bottom: 1rem; }
-    
-    .buttons { display:flex; gap:1rem; justify-content:center; align-items: center; min-height: 200px; position: relative; }
-    button { padding: 12px 28px; border-radius:999px; border:none; font-size:1.1rem; cursor:pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 20; }
+    .buttons { display:flex; gap:1.5rem; justify-content:center; align-items: center; min-height: 250px; position: relative; }
+    button { padding: 12px 28px; border-radius:999px; border:none; font-size:1.1rem; cursor:pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 20; -webkit-tap-highlight-color: transparent; }
     
     .yes { background:#ff6b9c; color:#000; font-weight: bold; position: relative; }
     .no { background:#2a2a35; color:#fff; }
-
+    .nav-btn { background: rgba(255, 107, 156, 0.2); color: #ff6b9c; font-weight: bold; margin: 5px; font-size: 0.8rem; border: 1px solid #ff6b9c; padding: 10px 15px; border-radius: 10px;}
+    .nav-btn:hover { background: #ff6b9c; color: #000; }
+    
     #envelopeGridDiv { width:100%; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 20px; }
-    .envelope { width:80px; height:80px; background:#ff6b9c; border-radius: 12px; cursor:pointer; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; border: 3px solid white; transition: 0.3s; }
-    .envelope:hover { transform: translateY(-10px) rotate(5deg); }
-    .env-label { font-size: 0.75rem; color: #ff6b9c; margin-top: 5px; font-weight: bold; }
+    .envelope { width:75px; height:75px; background:#ff6b9c; border-radius: 12px; cursor:pointer; display: flex; align-items: center; justify-content: center; font-size: 2rem; border: 3px solid white; transition: 0.3s; }
+    .envelope:hover { transform: translateY(-5px) rotate(5deg); }
+    .env-label { font-size: 0.7rem; color: #ff6b9c; margin-top: 5px; font-weight: bold; }
+
+    .card { background: rgba(255, 107, 156, 0.1); border: 1px solid #ff6b9c; padding: 15px; margin: 10px 0; border-radius: 10px; text-align: left; animation: popIn 0.5s ease; line-height: 1.4; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+    .media-grid img, .media-grid video { width: 100%; margin-bottom: 0; }
+    .full-width-media { width: 100% !important; grid-column: span 2; }
 
     .compliment-box { margin: 20px 0; padding: 15px; border: 1px dashed #ff6b9c; border-radius: 10px; background: rgba(255, 107, 156, 0.1); }
     #compText { font-style: italic; color: #ffb3d1; min-height: 40px; display: block; margin-bottom: 10px; font-size: 1.1rem; }
-
-    .reason-card { background: rgba(255, 107, 156, 0.1); border: 1px solid #ff6b9c; padding: 15px; margin: 10px 0; border-radius: 10px; text-align: left; animation: popIn 0.5s ease; }
-    .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-    .media-grid img, .media-grid video { width: 100%; margin-bottom: 0; }
     
-    .nav-btn { background: rgba(255, 107, 156, 0.2); color: #ff6b9c; font-weight: bold; margin: 5px; font-size: 0.9rem; border: 1px solid #ff6b9c; }
-    .nav-btn:hover { background: #ff6b9c; color: #000; }
+    .voice-card { background: #2a2a35; padding: 15px; border-radius: 20px; margin-top: 10px; border: 1px solid #ff6b9c; }
   </style>
 </head>
 <body>
@@ -86,7 +65,7 @@
   <audio id="bgMusic" loop><source src="ily1.mp3" type="audio/mpeg"></audio>
 
   <div id="app" class="screen">
-    <img src="assets/cute.gif" alt="cute"/>
+    <img src="assets/cute.gif" alt="cute" onerror="this.src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZicHFrbmM0eXF6eG95bm95bm95bm95bm95bm95bm95bm95JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNUMo/giphy.gif'"/>
     <h1 id="mainHeading">i made smth for u... wanna see?<br><small style="font-size: 0.9rem; opacity: 0.8;">if u dont u can press no 🙄</small></h1>
     <div class="buttons" id="btnContainer">
       <button class="no" id="noBtn">no 🙃</button>
@@ -114,54 +93,26 @@
       document.body.appendChild(h);
       setTimeout(() => h.remove(), duration * 1000);
     }
-    setInterval(createBgHeart, 300);
+    setInterval(createBgHeart, 400);
 
     document.getElementById("musicToggle").onclick = () => {
       musicPrompt.style.display = "none";
       if (audio.paused) { audio.play(); musicIcon.innerText = "⏸️"; } 
       else { audio.pause(); musicIcon.innerText = "▶️"; }
     };
-    
-    const compliments = [
-      "Ur my dumb short panda 🐼",
-      "they say sun is hottest thing in the world but they r wrong... cuz its u 🔥",
-      "you know ur just kawaiii... my cute little potato 🥔",
-      "My 85-B chested cupcake... see i remember.. ur the most beautiful and the hottest 🧁🔥",
-      "Maya has the prettiest eyes in the world 🌎",
-      "You're a meanie but you're MY meanie 🙄💖",
-      "How are you so cute even when you're mad? 😤",
-      "I actually love your smile more than fried chicken (barely) 🍗",
-      "Maya is 100% a cutie patootie 🐾",
-      "Ur so short i could use u as an armrest... a very cute armrest 🤏💖",
-      "Is it tiring being the finest girl in every room? 🙄🔥",
-      "Ur like a tiny 5-star meal... expensive taste and high quality 💅✨",
-      "Ur the only person i'd share my last piece of fried chicken with. 🍗❤️",
-      "Ur my favorite headache... 10/10 would recommend 🤕💞",
-      "Dangerously cute. Proceed with caution. ⚠️🥰",
-      "If being pretty was a crime, u'd be doing life in prison 🚓💨"
-    ];
 
-    const reasonsWhy = [
-      "I love the way you smile even when you're trying to be mad at me. 😊",
-      "I love that you're my 'little potato' and you own it. 🥔",
-      "I love how supportive you are, my favorite volleyball player. 🏐",
-      "I love your 'meanie' energy because I know it's just for me. 🙄❤️",
-      "I love that I can be my dumb self around you. 🐼",
-      "I love the way you loved me before even seeing me. 😊",
-      "I love the way u supported my weirdness..and my dumbess (we both r dumb). bleh",
-      "I love how u call me ur husband and father of ur children hehe🙄❤️",
-      "I love u every single way.. no matter how much u try to push me or idk.. i love u in every form..every single day.. every single second.. no matter what happens to me i will keep loving u muahhh"
-    ];
-
+    const compliments = ["Ur my dumb short panda 🐼", "They say sun is the hottest thing, but they're wrong... cuz it's u 🔥", "You know ur just kawaiii... my cute little potato 🥔", "My 85-B chested cupcake... see i remember.. ur the most beautiful and the hottest 🧁🔥", "Maya has the prettiest eyes in the world 🌎", "You're a meanie but you're MY meanie 🙄💖", "How are you so cute even when you're mad? 😤", "I actually love your smile more than fried chicken (barely) 🍗", "Maya is 100% a cutie patootie 🐾", "Ur so short i could use u as an armrest... a very cute armrest 🤏💖", "Is it tiring being the finest girl in every room? 🙄🔥", "Ur like a tiny 5-star meal... expensive taste and high quality 💅✨", "Ur the only person i'd share my last piece of fried chicken with. 🍗❤️", "Ur my favorite headache... 10/10 would recommend 🤕💞", "Dangerously cute. Proceed with caution. ⚠️🥰", "If being pretty was a crime, u'd be doing life in prison 🚓💨"];
+    const reasonsWhy = ["I love the way you smile even when you're trying to be mad at me. 😊", "I love that you're my 'little potato' and you own it. 🥔", "I love how supportive you are, my favorite volleyball player. 🏐", "I love your 'meanie' energy because I know it's just for me. 🙄❤️", "I love that I can be my dumb self around you. 🐼", "I love the way you loved me before even seeing me. 😊", "I love the way u supported my weirdness and my dumbness (we both r dumb). bleh 🤪", "I love how u call me ur husband and father of ur children hehe 🙄❤️", "I love u in every way.. no matter how much u try to push me.. i love u every single day, every single second. I will keep loving u forever muahhh 🌍💞"];
+    const thingsToDo = ["Go on a late-night fried chicken run together 🍗😋", "Watch you play volleyball and be your #1 cheerleader 🏐🥇", "Cuddle with you until we both fall asleep 🫂🛌", "Buy you a room full of kitten teddies 🧸🐱", "Finally see those prettiest eyes in person 🌎✨", "Travel to a new city and get lost with my favorite headache ✈️🗺️", "Have a dinner date where I eat you for dessert 😋🍫🍰", "Go on dates, hold ur hand, and let u yap while i just listen 🤝🗣️💖", "Shower together too... wiwiwi 🚿🧼😏", "Buy a pink and blue Porsche together 🏎️💨🩷💙", "Watch One Piece and other animes together 🏴‍☠️📺🍿", "Cook together and make a huge mess owowowo 🥘🍳", "And finally get married to you hehe muahh 💍👰‍♀️🤵‍♂️❤️", "travel somewhere quiet, just us", "steal fries from ur plate even when u say no", "listen to music and do absolutely nothing", "hug u for a long time without talking", "annoy u on purpose and say sorry with hugs", "take photos we never post", "sit next to u and feel safe", "grow old still bullying each other", "even if we don’t get to do all of these… i still choose u."];
     const dayContents = {
       7: { title: "Rose Day ", emoji: "🌹", msg: "Happy Rose Day Maya! 🌹 I'm so lucky to have had you by my side for another year. Here's to us! 🥂💖(Anniversary)", gif: "assets/rose.gif" },
-      8: { title: "Propose Day", emoji: "💍", msg: "I'd ask you an infinite times over... anf if u ssay no.. i will ask u infiniteXinfinite times over... cuz u aint getting rid of me.. hehe ❤️💍", gif: "assets/propose.gif" },
+      8: { title: "Propose Day", emoji: "💍", msg: "I'd ask you an infinite times over... and if u say no.. i will ask u infinite x infinite times over... cuz u aint getting rid of me.. hehe ❤️💍", gif: "assets/propose.gif" },
       9: { title: "Chocolate Day", emoji: "🍫", msg: "Sweetest girl ever gets the sweetest day..dw we will get ice cream and fried chicken too and i will eat u after those..yummy 🍫😋", gif: "assets/chocolate.gif" },
-      10: { title: "Teddy Day", emoji: "🧸", msg: "Soft hugs coming your way.. i will buy u kitten teddies lots and lots of kitten teddies 🧸🤗", gif: "assets/teddy.gif" },
-      11: { title: "Promise Day", emoji: "🤞", msg: "I promise to always to be by ur side and keep u happy .. if u annoy u sorry.. cuz i will annoy u more.. but i promise to love u no matter what.. i will always be by ur side. 🤞💖", gif: "assets/promise.gif" },
-      12: { title: "Hug Day", emoji: "🫂", msg: "Warmest hugs only for u .hug me till my ribcage break my volleyball player.. ur a strong woman soo🫂💞", gif: "assets/hug.gif" },
+      10: { title: "Teddy Day", emoji: "🧸", msg: "Soft hugs coming your way.. i will buy u kitten teddies, lots and lots of kitten teddies 🧸🤗", gif: "assets/teddy.gif" },
+      11: { title: "Promise Day", emoji: "🤞", msg: "I promise to always be by ur side and keep u happy.. if i annoy u sorry.. cuz i will annoy u more.. but i promise to love u no matter what. 🤞💖", gif: "assets/promise.gif" },
+      12: { title: "Hug Day", emoji: "🫂", msg: "Warmest hugs only for u. Hug me till my ribcage breaks, my volleyball player.. ur a strong woman soo 🫂💞", gif: "assets/hug.gif" },
       13: { title: "Kiss Day", emoji: "😘", msg: "omuaahhh a thousand kissy for my missy 😘💋", gif: "assets/kiss.gif" },
-      14: { title: "Valentine's Day", emoji: "💝", msg: "My one and only Valentine..love u always💝🌍", gif: "assets/valentine.gif" }
+      14: { title: "Valentine's Day", emoji: "💝", msg: "My one and only Valentine.. love u always 💝🌍", gif: "assets/valentine.gif" }
     };
 
     let noCount = 0;
@@ -170,58 +121,38 @@
     function initButtons() {
       const yesBtn = document.getElementById("yesBtn");
       const noBtn = document.getElementById("noBtn");
-      yesBtn.onclick = () => {
-        if(audio.paused) { audio.play(); musicIcon.innerText = "⏸️"; musicPrompt.style.display = "none"; }
-        yesClicked();
-      };
+      yesBtn.onclick = () => { if(audio.paused) { audio.play().catch(e => {}); musicIcon.innerText = "⏸️"; musicPrompt.style.display = "none"; } yesClicked(); };
       noBtn.onclick = () => {
-        noCount++;
-        yesScale += 0.45; // Slightly reduced scale per click to keep it cleaner
+        noCount++; yesScale += 0.45;
         if (noCount < 7) {
           noBtn.innerText = ["no 🙃", "y u clicking this?", "rude lol", "try again", "u can't say no", "behave!", "last chance!"][noCount];
           yesBtn.style.transform = `scale(${yesScale})`;
-          if(noCount > 2) {
-             noBtn.style.position = "fixed";
-             noBtn.style.left = Math.random() * 70 + "vw";
-             noBtn.style.top = Math.random() * 70 + "vh";
-          }
-        } else {
-          noBtn.style.display = "none";
-          document.getElementById("mainHeading").innerHTML = "click yes now Maya 😤";
-          yesBtn.style.transform = `scale(${yesScale + 0.8})`;
-        }
+          if(noCount > 2) { noBtn.style.position = "fixed"; noBtn.style.left = Math.random() * 70 + "vw"; noBtn.style.top = Math.random() * 70 + "vh"; }
+        } else { noBtn.style.display = "none"; document.getElementById("mainHeading").innerHTML = "Click yes now Maya 😤"; yesBtn.style.transform = `scale(${yesScale + 0.8})`; }
       };
     }
 
-    function yesClicked(){
-      app.innerHTML = `<h1>Yay! Opening it up for u... 💖</h1>`;
-      setTimeout(renderGiftEntrance, 1500);
-    }
-
-    function renderGiftEntrance() {
-      app.innerHTML=`<img src="assets/heart_anim.gif" style="width:260px;"/><h1>Hehe, good choice and i knew u would click yes after all im ur muffin. ❤️</h1><button class="yes" onclick="renderKitten()">Click for Surprise 🎁</button>`;
-    }
-
-    function renderKitten() {
-      app.innerHTML=`<img src="assets/kitten.gif" id="giftGif" style="width:280px; cursor:pointer;"/><h1>Tap the kitten for the surprises and gifts 🐾</h1>`;
-      document.getElementById("giftGif").onclick = showEnvelopeGrid;
-    }
+    function yesClicked(){ app.innerHTML = `<h1>Yay! Opening it up for u... 💖</h1>`; setTimeout(renderGiftEntrance, 1500); }
+    function renderGiftEntrance() { app.innerHTML=`<img src="assets/heart_anim.gif" style="width:260px;" onerror="this.src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZicHFrbmM0eXF6eG95bm95bm95bm95bm95bm95bm95bm95JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/unQ3IJU2RG7DO/giphy.gif'"/><h1>Hehe, good choice! I knew u would click yes, after all im ur muffin. ❤️</h1><button class="yes" onclick="renderKitten()">Click for Surprise 🎁</button>`; }
+    function renderKitten() { app.innerHTML=`<img src="assets/kitten.gif" id="giftGif" style="width:280px; cursor:pointer;" onerror="this.src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3R1ZzNtcms1Yno1dGZkZzJueHpxbmR3eXNqYXRxbmR3eXNqYXRxJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/MDJ9IbMv3UZfW/giphy.gif'"/><h1>Tap the kitten for the surprises and gifts 🐾</h1>`; document.getElementById("giftGif").onclick = showEnvelopeGrid; }
 
     function showEnvelopeGrid() {
       app.innerHTML = `
         <div class="scrollable-content">
-          <h1 style="margin-bottom:20px;">For You, ${herName} 💌</h1>
+          <h1 style="margin-bottom:10px;">For You, ${herName} 💌</h1>
+          <p style="color: #ffb3d1; font-size: 0.8rem; margin-bottom: 20px; font-weight: bold;">(Plz open serially from Feb 7 to Feb 14! 🙏)</p>
           <div id="envelopeGridDiv"></div>
-          
-          <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
-            <button class="nav-btn" onclick="showReasons()">Reasons Why 📝</button>
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin-bottom: 20px;">
+            <button class="nav-btn" onclick="showReasons()">Reasons 📝</button>
+            <button class="nav-btn" onclick="showToDo()">To Do ✈️</button>
             <button class="nav-btn" onclick="showMemories()">Memories 📸</button>
+            <button class="nav-btn" onclick="showLetter()" style="border-color: #ffb3d1;">Love Letter ✉️</button>
+            <button class="nav-btn" onclick="showMeRn()" style="border-color: #ffb3d1;">Me RN 🤭</button>
           </div>
-
           <div class="compliment-box">
             <span id="compText">Need a compliment?</span>
             <button class="yes" style="padding: 8px 15px; font-size: 0.9rem;" onclick="generateCompliment()">Spam Me 💖</button>
-            <p style="font-size: 0.7rem; margin-top:5px; opacity:0.6;">Maya Meter: <span id="cCount">0</span> forced compliments</p>
+            <p style="font-size: 0.7rem; margin-top:5px; opacity:0.6;">Maya Meter: <span id="cCount">${compCount}</span> forced compliments</p>
           </div>
         </div>
       `;
@@ -230,31 +161,73 @@
         box.innerHTML = `<div class="envelope" onclick="triggerDay(${day})">✉️</div><p class="env-label">${dayContents[day].title}</p>`;
         document.getElementById("envelopeGridDiv").appendChild(box);
       });
-      document.getElementById("cCount").innerText = compCount;
     }
 
     window.showReasons = function() {
-      let reasonsHTML = `<div class="scrollable-content"><h1>Why I Love You 💖</h1>`;
-      reasonsWhy.forEach((reason, i) => {
-        reasonsHTML += `<div class="reason-card"><strong>#${i+1}:</strong> ${reason}</div>`;
-      });
-      reasonsHTML += `<button class="yes" style="margin-top:20px" onclick="showEnvelopeGrid()">Back 💌</button></div>`;
-      app.innerHTML = reasonsHTML;
+      let html = `<div class="scrollable-content"><h1>Why I Love You 💖</h1>`;
+      reasonsWhy.forEach((item, i) => { html += `<div class="card"><strong>#${i+1}:</strong> ${item}</div>`; });
+      html += `<button class="yes" style="margin-top:20px" onclick="showEnvelopeGrid()">Back 💌</button></div>`;
+      app.innerHTML = html;
     };
-
+    window.showToDo = function() {
+      let html = `<div class="scrollable-content"><h1>Things I Wanna Do With U 🗺️</h1>`;
+      thingsToDo.forEach((item) => { html += `<div class="card">✨ ${item}</div>`; });
+      html += `<button class="yes" style="margin-top:20px" onclick="showEnvelopeGrid()">Back 💌</button></div>`;
+      app.innerHTML = html;
+    };
+    
     window.showMemories = function() {
       app.innerHTML = `
         <div class="scrollable-content">
           <h1>Our Memories 📸</h1>
-          <p style="font-size: 0.8rem; opacity: 0.7;">Check out our moments!</p>
           <div class="media-grid">
-            <img src="assets/memory1.jpg" alt="Memory 1" onerror="this.src='https://via.placeholder.com/150?text=Photo+1'"/>
-            <img src="assets/memory2.jpg" alt="Memory 2" onerror="this.src='https://via.placeholder.com/150?text=Photo+2'"/>
-            <video controls>
-              <source src="assets/video1.mp4" type="video/mp4">
-              Your browser does not support video.
-            </video>
-            <img src="assets/memory3.jpg" alt="Memory 3" onerror="this.src='https://via.placeholder.com/150?text=Photo+3'"/>
+            <img src="assets/memory1.jpg" onerror="this.src='https://via.placeholder.com/150?text=Mem+1'"/>
+            <img src="assets/memory2.png" onerror="this.src='https://via.placeholder.com/150?text=Mem+2'"/>
+            <img src="assets/memory3.jpg" onerror="this.src='https://via.placeholder.com/150?text=Mem+3'"/>
+            <img src="assets/memory4.jpg" onerror="this.src='https://via.placeholder.com/150?text=Mem+4'"/>
+            <img src="assets/memory5.jpg" class="full-width-media" onerror="this.src='https://via.placeholder.com/280x200?text=Mem+5'"/>
+            <video controls playsinline class="full-width-media"><source src="assets/video1.mp4" type="video/mp4"></video>
+          </div>
+          <button class="yes" style="margin-top:20px" onclick="showEnvelopeGrid()">Back 💌</button>
+        </div>`;
+    };
+
+    window.showLetter = function() {
+      app.innerHTML = `
+        <div class="scrollable-content">
+          <h1>Love Letter 💌</h1>
+          <div class="card" style="line-height:1.6; font-size:1rem;">
+            <p>hey maya,</p><br>
+            <p>i don’t really know how to start letters… but i know how i feel.</p><br>
+            <p>loving you has never been loud or easy. it’s been quiet, patient, and sometimes painful — but it’s also been the most real thing i’ve ever felt.</p><br>
+            <p>even when we don’t talk much, even when things feel unsure, my feelings don’t disappear. they don’t fade. they stay.</p><br>
+            <p>you don’t owe me anything. not replies, not promises, not certainty. i just want you to be safe, happy, and free — even if that freedom scares me sometimes.</p><br>
+            <p>i love the way you exist. the way you smile, the way you get annoyed, the way you care more than you admit.</p><br>
+            <p>if one day you choose me fully, i’ll be here.<br>if one day you need space, i’ll still care.</p><br>
+            <p>i’m not loving you for a moment.<br>i’m loving you with patience.</p><br>
+            <p style="margin-top:15px;"><strong>always yours,<br>reeshi</strong></p>
+          </div>
+          <button class="yes" style="margin-top:20px" onclick="showEnvelopeGrid()">Back 💌</button>
+        </div>
+      `;
+    };
+
+    window.showMeRn = function() {
+      app.innerHTML = `
+        <div class="scrollable-content">
+          <h1>This is me rn 🤭</h1>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <img src="assets/me1.jpg" style="width:280px;" onerror="this.src='https://via.placeholder.com/280x350?text=Pic+1'"/>
+            <img src="assets/me2.jpg" style="width:280px;" onerror="this.src='https://via.placeholder.com/280x350?text=Pic+2'"/>
+            <img src="assets/me3.jpg" style="width:280px;" onerror="this.src='https://via.placeholder.com/280x350?text=Pic+3'"/>
+            <div class="voice-card">
+              <p style="font-size: 0.8rem; margin-bottom: 8px; color: #ffb3d1;">Play my voice note 🎤</p>
+              <audio controls style="width: 240px;"><source src="assets/voice_note.mp3" type="audio/mpeg"></audio>
+            </div>
+            <div class="card" style="text-align: center; width: 280px;">
+              <strong>Status:</strong> Simping for Maya ❤️<br>
+              <strong>Mood:</strong> Missing my short panda 🐼
+            </div>
           </div>
           <button class="yes" style="margin-top:20px" onclick="showEnvelopeGrid()">Back 💌</button>
         </div>
@@ -274,35 +247,21 @@
       const overlayTitle = document.getElementById("overlayTitle");
       overlay.style.display = "flex";
       overlayTitle.innerHTML = `Happy ${data.title}! <br> ${data.emoji}`;
-      
-      for(let i=0; i<40; i++) {
+      for(let i=0; i<30; i++) {
         setTimeout(() => {
           const p = document.createElement("div");
-          p.classList.add("bg-heart");
-          p.style.color = "#fff";
-          p.innerText = data.emoji;
-          p.style.left = Math.random() * 100 + "vw";
-          p.style.top = "-50px";
-          p.style.zIndex = "300";
+          p.classList.add("bg-heart"); p.style.color = "#fff"; p.innerText = data.emoji;
+          p.style.left = Math.random() * 100 + "vw"; p.style.top = "-50px"; p.style.zIndex = "300";
           p.style.animation = `fall ${Math.random()*2 + 2}s linear forwards`;
           document.body.appendChild(p);
           setTimeout(() => p.remove(), 3000);
-        }, i * 50);
+        }, i * 60);
       }
-
-      setTimeout(() => {
-        overlay.style.display = "none";
-        renderMessage(data);
-      }, 2500);
+      setTimeout(() => { overlay.style.display = "none"; renderMessage(data); }, 2500);
     };
 
     function renderMessage(data) {
-      app.innerHTML=`
-        <img src="${data.gif}" style="width:280px;"/>
-        <h1 style="color:#ff6b9c;">${data.title}</h1>
-        <p style="font-size:1.2rem; margin:15px 0; padding: 0 10px;">${data.msg}</p>
-        <button class="yes" onclick="showEnvelopeGrid()">Back 💌</button>
-      `;
+      app.innerHTML=`<div class="scrollable-content"><img src="${data.gif}" style="width:280px;" onerror="this.src='https://via.placeholder.com/280x200?text=${data.title}'"/><h1 style="color:#ff6b9c;">${data.title}</h1><p style="font-size:1.2rem; margin:15px 0; padding: 0 10px; line-height: 1.5;">${data.msg}</p><button class="yes" onclick="showEnvelopeGrid()">Back 💌</button></div>`;
     }
 
     initButtons();
