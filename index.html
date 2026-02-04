@@ -112,12 +112,10 @@
       setTimeout(() => h.remove(), duration * 1000);
     }
     
-    // UPDATED: Floating images fl1.jpg, fl2.jpg, etc.
     function createFloatingImage() {
       const img = document.createElement("img");
       img.classList.add("floating-img");
       
-      // Specifically looking for fl1 to fl6 in assets
       const flImages = [
         "assets/fl1.jpg", 
         "assets/fl2.jpg", 
@@ -128,13 +126,9 @@
       ];
       
       img.src = flImages[Math.floor(Math.random() * flImages.length)];
-      
-      // Fallback if the specific fl file is missing
       img.onerror = function() { this.src='https://via.placeholder.com/150/ff6b9c/ffffff?text=Maya💖'; };
 
       img.style.left = Math.random() * 85 + "vw";
-      
-      // Varied large sizes
       const size = (Math.random() * 30 + 100) + "px"; 
       img.style.width = size;
       img.style.height = size;
@@ -163,7 +157,7 @@
       9: { title: "Chocolate Day", emoji: "🍫", msg: "Sweetest girl ever gets the sweetest day..dw we will get ice cream and fried chicken too and i will eat u after those..yummy 🍫😋", gif: "assets/chocolate.gif" },
       10: { title: "Teddy Day", emoji: "🧸", msg: "Soft hugs coming your way.. i will buy u kitten teddies, lots and lots of kitten teddies 🧸🤗", gif: "assets/teddy.gif" },
       11: { title: "Promise Day", emoji: "🤞", msg: "I promise to always be by ur side and keep u happy.. if i annoy u sorry.. cuz i will annoy u more.. but i promise to love u no matter what. 🤞💖", gif: "assets/promise.gif" },
-      12: { title: "Hug Day", emoji: "🫂", msg: "Warmest hugs only for u. Hug me till my ribcage breaks, my volleyball player.. ur a strong woman soo 🫂💞", gif: "assets/hug.gif" },
+      12: { title: "Hug Day", emoji: "💞", msg: "Warmest hugs only for u. Hug me till my ribcage breaks, my volleyball player.. ur a strong woman soo 🫂💞", gif: "assets/hug.gif" },
       13: { title: "Kiss Day", emoji: "😘", msg: "omuaahhh a thousand kissy for my missy 😘💋", gif: "assets/kiss.gif" },
       14: { title: "Valentine's Day", emoji: "💝", msg: "My one and only Valentine.. love u always 💝🌍", gif: "assets/valentine.gif" }
     };
@@ -207,6 +201,9 @@
             <button class="yes" style="padding: 8px 15px; font-size: 0.9rem;" onclick="generateCompliment()">Spam Me 💖</button>
             <p style="font-size: 0.7rem; margin-top:5px; opacity:0.6;">Maya Meter: <span id="cCount">${compCount}</span> forced compliments</p>
           </div>
+          <button class="nav-btn" onclick="showFinalVideo()" style="width:100%; margin-top:20px; background:#ff6b9c; color:#000; border:none; padding:15px; border-radius: 15px; font-size: 1.1rem;">
+            Continue ➔
+          </button>
         </div>
       `;
       Object.keys(dayContents).forEach(day => {
@@ -215,6 +212,26 @@
         document.getElementById("envelopeGridDiv").appendChild(box);
       });
     }
+
+    // FINAL VIDEO SECTION
+    window.showFinalVideo = function() {
+      app.innerHTML = `
+        <div class="scrollable-content">
+          <h1 style="color:#ff6b9c;">A Little Something Extra... 🎥</h1>
+          <div class="card" style="text-align:center;">
+            <p style="margin-bottom:15px; font-style:italic;">I made this just for you. ❤️</p>
+            <video controls playsinline style="width:100%; border: 3px solid #ff6b9c;">
+              <source src="assets/final_surprise.mp4" type="video/mp4">
+              Your browser doesn't support the video tag.
+            </video>
+          </div>
+          <div style="margin-top:20px;">
+            <button class="yes" onclick="showEnvelopeGrid()">Back to Envelopes 💌</button>
+          </div>
+          <h2 style="margin-top:30px; font-size: 1.2rem; opacity: 0.9;">I love you more than words can say, Maya. ✨</h2>
+        </div>
+      `;
+    };
 
     window.showReasons = function() {
       let html = `<div class="scrollable-content"><h1>Why I Love You 💖</h1>`;
