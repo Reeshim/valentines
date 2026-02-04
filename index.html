@@ -10,14 +10,32 @@
     
     .top-notice { position: absolute; top: 15px; width: 90%; text-align: center; font-size: 0.8rem; font-weight: 800; color: #ff6b9c; z-index: 100; letter-spacing: 0.5px; text-transform: uppercase; animation: noticePulse 2s infinite; }
     @keyframes noticePulse { 0% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.02); } 100% { opacity: 0.6; transform: scale(1); } }
+    
+    /* Background Elements */
     .bg-heart { position: absolute; color: #ff6b9c; opacity: 0.7; pointer-events: none; z-index: 1; animation: floatUp linear forwards; }
+    
+    /* Big, Glowing Floating Local Images */
+    .floating-img { 
+      position: absolute; 
+      width: 110px; 
+      height: 110px; 
+      object-fit: cover; 
+      border-radius: 20px; 
+      border: 3px solid #ff6b9c; 
+      opacity: 0.85; 
+      box-shadow: 0 0 20px rgba(255, 107, 156, 0.5); 
+      pointer-events: none; 
+      z-index: 1; 
+      animation: floatUp linear forwards; 
+    }
+    
     .music-container { position: fixed; top: 35px; right: 20px; z-index: 110; display: flex; align-items: center; gap: 10px; }
     .music-prompt { background: #ff6b9c; color: #000; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; animation: bounce 2s infinite; }
     .music-player { background: rgba(255, 107, 156, 0.4); padding: 10px; border-radius: 50%; cursor: pointer; border: 2px solid #ff6b9c; display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; }
     #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); display: none; align-items: center; justify-content: center; z-index: 200; flex-direction: column; text-align: center; }
     #overlay h1 { font-size: 2.5rem; color: #ff6b9c; padding: 20px; animation: popIn 0.6s ease; text-shadow: 0 0 15px rgba(255,107,156,0.6); }
 
-    @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); opacity: 0.8; } to { transform: translateY(-20vh) rotate(360deg); opacity: 0; } }
+    @keyframes floatUp { from { transform: translateY(110vh) rotate(0deg); } to { transform: translateY(-30vh) rotate(360deg); } }
     @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
     @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateX(0);} 40% {transform: translateX(-5px);} }
@@ -93,7 +111,42 @@
       document.body.appendChild(h);
       setTimeout(() => h.remove(), duration * 1000);
     }
+    
+    // UPDATED: Floating images fl1.jpg, fl2.jpg, etc.
+    function createFloatingImage() {
+      const img = document.createElement("img");
+      img.classList.add("floating-img");
+      
+      // Specifically looking for fl1 to fl6 in assets
+      const flImages = [
+        "assets/fl1.jpg", 
+        "assets/fl2.jpg", 
+        "assets/fl3.jpg", 
+        "assets/fl4.jpg",
+        "assets/fl5.jpg",
+        "assets/fl6.jpg"
+      ];
+      
+      img.src = flImages[Math.floor(Math.random() * flImages.length)];
+      
+      // Fallback if the specific fl file is missing
+      img.onerror = function() { this.src='https://via.placeholder.com/150/ff6b9c/ffffff?text=Maya💖'; };
+
+      img.style.left = Math.random() * 85 + "vw";
+      
+      // Varied large sizes
+      const size = (Math.random() * 30 + 100) + "px"; 
+      img.style.width = size;
+      img.style.height = size;
+      
+      const duration = Math.random() * 5 + 8; 
+      img.style.animationDuration = duration + "s";
+      document.body.appendChild(img);
+      setTimeout(() => img.remove(), duration * 1000);
+    }
+
     setInterval(createBgHeart, 400);
+    setInterval(createFloatingImage, 2800); 
 
     document.getElementById("musicToggle").onclick = () => {
       musicPrompt.style.display = "none";
@@ -200,7 +253,13 @@
             <p>hey maya,</p><br>
             <p>i don’t really know how to start letters… but i know how i feel.</p><br>
             <p>loving you has never been loud or easy. it’s been quiet, patient, and sometimes painful — but it’s also been the most real thing i’ve ever felt.</p><br>
-            <p>even when we don’t talk much, even when things feel unsure, my feelings don’t disappear. they don’t fade. they stay.</p><br>
+            <p>even when we don’t talk much, even when things feel unsure, my feelings don’t disappear. they don’t fade. they stay.i know im annoying as hell..stubborn as hell</p><br>
+            <p>i made u cry multiple times... i forced u.. i did a lot..and im truly genuinely sorry for that... it just scares me.. thought of someone touching u.</p><br>
+            <p>thought of someone yk.. it just scares me so much.. i dont want to lose u.. ur still my everything and u will be..im not the perfect guy but i always want to be better for u ad us</p><br>
+            <p> idk how u feel for me these days.but deep down.i hope i wish and i pray that there is still smth for me.something we shared.and nothing is going to stop me from loving u</p><br>
+            <p>i m saying this with all my sincerity.. i love u.. i wanna grow old with u..have kids grandkids.lots of kittens and puppies..eat cook together yk..ugh i love u so much</p><br>
+            <p>u did so much for me.u talked to me.got imessages even when ur dad was there.. sent me photos.vms.. many things.and thank u for that my baby.. i know i m in no postion to say this..but u will always be my cute hot baby..my panda my wife.and mother of our children..my bully..my friend my bestfriend..sweetest and kindest girl who loved me despite my flaws</p><br>
+            <p>if ur sick of me. i will be ur doctor.if ur tired of me i will be a bed.if ur losing interest i will be a bank..or a library..if u want to leave okey.but im coming with u..ehehe muahhh</p><br>
             <p>you don’t owe me anything. not replies, not promises, not certainty. i just want you to be safe, happy, and free — even if that freedom scares me sometimes.</p><br>
             <p>i love the way you exist. the way you smile, the way you get annoyed, the way you care more than you admit.</p><br>
             <p>if one day you choose me fully, i’ll be here.<br>if one day you need space, i’ll still care.</p><br>
